@@ -2,4 +2,4 @@ FROM gitpod/workspace-full-vnc
 
 USER gitpod
 
-RUN yarn add global expo-cli
+RUN yarn add global expo-cli @expo/ngrok
