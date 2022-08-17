@@ -4,5 +4,5 @@ ports:
   - port: 19000-19002
 tasks:
   - before: yarn
-    command: expo login \
-      yarn start:tunnel
+  - before: expo login
+    command: yarn start:tunnel
