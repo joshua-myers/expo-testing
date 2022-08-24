@@ -1,0 +1,65 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.245.0/containers/docker-existing-dockerfile
+{
+  "name": "Existing Dockerfile",
+
+  // Sets the run context to one level up instead of the .devcontainer folder.
+  "context": "..",
+
+  // Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+  "dockerFile": "Dockerfile",
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [],
+
+  // Uncomment the next line to run commands after the container is created - for example installing curl.
+  // "postCreateCommand": "apt-get update && apt-get install -y curl",
+
+  // The optional 'runArgs' property can be used to specify additional runtime arguments.
+  "runArgs": [
+    "--privileged", // give all capabilities to a container, in other words, the container can then do almost everything that the host can do
+    "--net",
+    "host", // forwarding all host machine ports
+    "-v",
+    "/dev/bus/usb:/dev/bus/usb" // mount connected USB devices to a container
+  ],
+
+  // Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
+  // "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],
+
+  // Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
+  // "remoteUser": "vscode"
+
+  "settings": {
+    // This will ignore your local shell user setting for Linux since shells like zsh are typically
+    // not in base container images. You can also update this to an specific shell to ensure VS Code
+    // uses the right one for terminals and tasks. For example, /bin/bash (or /bin/ash for Alpine).
+    "terminal.integrated.profiles.linux": {
+      "bash": {
+        "path": "bash",
+        "icon": "terminal-bash"
+      },
+      "zsh": {
+        "path": "zsh"
+      },
+      "fish": {
+        "path": "fish"
+      },
+      "tmux": {
+        "path": "tmux",
+        "icon": "terminal-tmux"
+      },
+      "pwsh": {
+        "path": "pwsh",
+        "icon": "terminal-powershell"
+      }
+    }
+  },
+
+  // Add the IDs of extensions you want installed when the container is created in the array below.
+  "extensions": [
+    "msjsdiag.vscode-react-native",
+    "eamodio.gitlens",
+    "bradlc.vscode-tailwindcss"
+  ]
+}
