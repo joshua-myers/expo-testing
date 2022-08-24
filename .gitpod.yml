@@ -1,5 +1,5 @@
 image:
-  file: .gitpod.dockerfile
+  file: .devcontainer/Dockerfile
 ports:
   - port: 19000-19002
 tasks:
