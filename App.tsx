@@ -1,13 +1,12 @@
-import { Box, NativeBaseProvider } from "native-base";
+import { Button, Center, Heading, NativeBaseProvider, Text } from "native-base";
 import React, { useState } from "react";
 import {
-  Button,
   FlatList,
   StyleSheet,
-  Text,
   TextInput,
-  View,
+  View
 } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 export default function App() {
   const [adding, setadding] = useState(false);
@@ -24,10 +23,12 @@ export default function App() {
 
   return (
     <NativeBaseProvider>
-      <Box bg="primary.400" p="12" rounded="lg">
-        <View style={styles.container}>
-          <View style={styles.header}>
-            <Text>Digital Diner</Text>
+      <SafeAreaProvider>
+        <SafeAreaView>
+          <Center bg="coolGray.200" p="20" h="full">
+            <View >
+              <Heading>Digital Diner</Heading>
+            </View>
             {adding && (
               <TextInput
                 style={styles.input}
@@ -38,16 +39,21 @@ export default function App() {
                 onChangeText={setRecipe}
               ></TextInput>
             )}
-            <Button title={adding ? "Done" : "Add Recipe"} onPress={addRecipe} />
-          </View>
-          <View style={styles.list}>
+            <Button
+              colorScheme="primary"
+              onPress={addRecipe}
+            >
+              {adding ? "Done" : "Add Recipe"}
+            </Button>
+
             <FlatList
               data={recipies}
               renderItem={({ item }) => <Text>{item}</Text>}
             />
-          </View>
-        </View>
-      </Box>
+          </Center>
+
+        </SafeAreaView>
+      </SafeAreaProvider>
     </NativeBaseProvider>
   );
 }
