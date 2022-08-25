@@ -1,3 +1,9 @@
 FROM reactnativecommunity/react-native-android:latest
 
-RUN npm install -g expo-cli react-native-cli @expo/ngrok@^4.1.0
+RUN yarn global add \
+    expo-cli \
+    eas-cli \
+    react-native-cli
+RUN npm i -g npm@latest
+# ngrok requires npm to install globally
+RUN npm i -g @expo/ngrok@^4.1.0
