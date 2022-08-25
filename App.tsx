@@ -1,3 +1,4 @@
+import 'expo-dev-client';
 import { Button, Center, FlatList, Heading, Input, NativeBaseProvider, Text, View } from "native-base";
 import React, { useState } from "react";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
