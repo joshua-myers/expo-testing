@@ -61,6 +61,7 @@
 	"msjsdiag.vscode-react-native",
 	"eamodio.gitlens",
 	"bradlc.vscode-tailwindcss",
-	"NativeBase.nativebase-v3-vscode-extension"
+	"NativeBase.nativebase-v3-vscode-extension",
+	"byCedric.vscode-expo"
 ]
 }
