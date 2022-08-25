@@ -58,8 +58,9 @@
 
   // Add the IDs of extensions you want installed when the container is created in the array below.
   "extensions": [
-    "msjsdiag.vscode-react-native",
-    "eamodio.gitlens",
-    "bradlc.vscode-tailwindcss"
-  ]
+	"msjsdiag.vscode-react-native",
+	"eamodio.gitlens",
+	"bradlc.vscode-tailwindcss",
+	"NativeBase.nativebase-v3-vscode-extension"
+]
 }
