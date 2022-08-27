@@ -1,39 +1,22 @@
-import { Button, Center, FlatList, Heading, Input, Text, View } from "native-base";
-import React, { useState } from "react";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { saveRecipe, useRecipes } from "../firebase/recipies";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Center, Heading, View } from "native-base";
+import React from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+export const HomeStack = createNativeStackNavigator();
+
+export const HomeStackScreen = () => (
+  <HomeStack.Navigator>
+    <HomeStack.Screen name="Home" component={Home} />
+  </HomeStack.Navigator>
+)
 
 export const Home = () => {
-  const [adding, setadding] = useState(false);
-  const [recipe, setRecipe] = useState("");
-  const { recipes, loading, error } = useRecipes();
-
-  const addRecipe = async () => {
-    if (recipe) {
-      await saveRecipe({ name: recipe });
-      setRecipe("");
-    }
-    setadding((a) => !a);
-  };
-
   return <SafeAreaView>
     <Center bg="coolGray.200" p="20" h="full">
       <View >
         <Heading>Digital Diner</Heading>
       </View>
-      {adding && (
-        <Input placeholder="Recipe goes here..." onChangeText={setRecipe} />
-      )}
-      <Button
-        colorScheme="primary"
-        onPress={addRecipe}
-      >
-        {adding ? "Done" : "Add Recipe"}
-      </Button>
-      <FlatList
-        data={recipes}
-        renderItem={({ item }) => <Text>{item.name}</Text>}
-      />
     </Center>
   </SafeAreaView>
 }
