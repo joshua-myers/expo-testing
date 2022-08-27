@@ -13,8 +13,8 @@ const Tab = createBottomTabNavigator();
 export const Navigation = () => {
   return <NavigationContainer>
     <Tab.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
-      <Tab.Screen name='HomeStack' component={HomeStackScreen} options={{ tabBarIcon: ({ focused, color, size }) => <Icon as={Ionicons} name={focused ? 'home' : 'home-outline'} size={size} color={color} /> }} />
-      <Tab.Screen name='RecipesStack' component={RecipesStackScreen} options={{ tabBarIcon: ({ focused, color, size }) => <Icon as={Ionicons} name={focused ? 'receipt' : 'receipt-outline'} size={size} color={color} /> }} />
+      <Tab.Screen name='HomeStack' component={HomeStackScreen} options={{ title: 'Home', tabBarIcon: ({ focused, color, size }) => <Icon as={Ionicons} name={focused ? 'home' : 'home-outline'} size={size} color={color} /> }} />
+      <Tab.Screen name='RecipesStack' component={RecipesStackScreen} options={{ title: 'Recipes', tabBarIcon: ({ focused, color, size }) => <Icon as={Ionicons} name={focused ? 'receipt' : 'receipt-outline'} size={size} color={color} /> }} />
     </Tab.Navigator>
   </NavigationContainer>
 }

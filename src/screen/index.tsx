@@ -3,7 +3,7 @@ import { Center, Heading, View } from "native-base";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export const HomeStack = createNativeStackNavigator();
+const HomeStack = createNativeStackNavigator();
 
 export const HomeStackScreen = () => (
   <HomeStack.Navigator>
