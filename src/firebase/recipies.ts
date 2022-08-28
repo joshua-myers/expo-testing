@@ -1,9 +1,5 @@
-import {
-  addDoc
-} from 'firebase/firestore';
-import {
-  useCollectionData
-} from 'react-firebase-hooks/firestore';
+import { addDoc } from 'firebase/firestore';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { createCollection } from './app';
 
 export type Recipe = {

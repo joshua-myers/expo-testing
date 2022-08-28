@@ -1,11 +1,5 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import {
-  Box, HStack,
-  Icon,
-  IconButton,
-  StatusBar,
-  Text
-} from 'native-base';
+import { Box, HStack, Icon, IconButton, StatusBar, Text } from 'native-base';
 import React from 'react';
 
 export const AppBar = () => {
