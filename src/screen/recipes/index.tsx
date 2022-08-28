@@ -22,16 +22,21 @@ export const Recipes = () => {
       await saveRecipe({ name: recipe });
       setRecipe('');
     }
-    setadding((a) => !a);
+    setadding(a => !a);
   };
 
   return (
     <>
-      {adding && <Input placeholder="Recipe goes here..." onChangeText={setRecipe} />}
+      {adding && (
+        <Input placeholder="Recipe goes here..." onChangeText={setRecipe} />
+      )}
       <Button colorScheme="primary" onPress={addRecipe}>
         {adding ? 'Done' : 'Add Recipe'}
       </Button>
-      <FlatList data={recipes} renderItem={({ item }) => <Text>{item.name}</Text>} />
+      <FlatList
+        data={recipes}
+        renderItem={({ item }) => <Text>{item.name}</Text>}
+      />
     </>
   );
 };

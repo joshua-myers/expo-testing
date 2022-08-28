@@ -1,5 +1,11 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import { Box, Center, HStack, Icon, IconButton, StatusBar, Text } from 'native-base';
+import {
+  Box, HStack,
+  Icon,
+  IconButton,
+  StatusBar,
+  Text
+} from 'native-base';
 import React from 'react';
 
 export const AppBar = () => {
@@ -17,7 +23,9 @@ export const AppBar = () => {
         <HStack alignItems="center">
           <IconButton
             disabled
-            icon={<Icon size="sm" as={MaterialIcons} name="menu" color="white" />}
+            icon={
+              <Icon size="sm" as={MaterialIcons} name="menu" color="white" />
+            }
           />
           <Text color="white" fontSize="20" fontWeight="bold">
             Home
