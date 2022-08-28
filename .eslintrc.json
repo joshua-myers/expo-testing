@@ -1,0 +1,95 @@
+{
+  "extends": [
+    "airbnb",
+    "airbnb-typescript",
+    "airbnb/hooks",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "plugin:prettier/recommended"
+  ],
+  "globals": {
+    "fetch": true
+  },
+  "ignorePatterns": [
+    "**/*.test.*",
+    "**/*.js",
+    "**/*.jsx"
+  ],
+  "plugins": [
+    "@typescript-eslint",
+    "react",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "default-case": "off",
+    "global-require": "off",
+    "import/prefer-default-export": "off",
+    "no-use-before-define": "off",
+    "arrow-body-style": "warn",
+    "import/order": "warn",
+    "camelcase": "warn",
+    "consistent-return": "warn",
+    "import/extensions": [
+      "error",
+      {
+        "json": "always",
+        "svg": "always",
+        "mp4": "always",
+        "png": "always"
+      }
+    ],
+    "no-fallthrough": "off",
+    "no-param-reassign": "warn",
+    "no-nested-ternary": "warn",
+    "no-empty-pattern": "off",
+    "no-case-declarations": "off",
+    "prefer-destructuring": "warn",
+    "react/destructuring-assignment": 0,
+    "react/jsx-props-no-spreading": "off",
+    "react/prop-types": "warn",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/no-unescaped-entities": 0,
+    "react/require-default-props": 0,
+    "react/function-component-definition": "error",
+    "react/no-unstable-nested-components": "error",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".ts",
+          ".tsx",
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "react/jsx-no-useless-fragment": "error",
+    "@typescript-eslint/ban-ts-comment": [
+      "error"
+    ],
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/explicit-module-boundary-types": "error",
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-use-before-define": [
+      "error",
+      {
+        "variables": false
+      }
+    ],
+    "@typescript-eslint/no-empty-function": [
+      "error"
+    ],
+    "@typescript-eslint/no-shadow": [
+      "error"
+    ]
+  }
+}
