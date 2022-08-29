@@ -1,6 +1,9 @@
 {
   "expo": {
     "slug": "DigitalDiner",
-    "name": "Digital Diner"
+    "name": "Digital Diner",
+    "ios": {
+      "bundleIdentifier": "com.joshua.myers.DigitalDiner"
+    }
   }
 }
