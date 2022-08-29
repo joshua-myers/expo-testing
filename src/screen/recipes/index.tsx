@@ -1,37 +1,32 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Button, FlatList, Input, Text } from 'native-base';
-import React, { useState } from 'react';
+import { Button, FlatList, Text } from 'native-base';
+import React from 'react';
+import {
+  RecipesStackParamsList,
+  RecipesTabScreenProps,
+} from '../../components/navigation/types';
+import { useRecipes } from '../../firebase/recipies';
 
-import { saveRecipe, useRecipes } from '../../firebase/recipies';
+import { Add } from './add';
 
-const RecipesStack = createNativeStackNavigator();
+const RecipesStack = createNativeStackNavigator<RecipesStackParamsList>();
 
 export const RecipesStackScreen = () => (
   <RecipesStack.Navigator>
-    <RecipesStack.Screen name="Recipes" component={Recipes} />
+    <RecipesStack.Screen name='Recipes' component={Recipes} />
+    <RecipesStack.Screen name='AddRecipe' component={Add} />
   </RecipesStack.Navigator>
 );
 
-export const Recipes = () => {
-  const [adding, setadding] = useState(false);
-  const [recipe, setRecipe] = useState('');
+export const Recipes = ({ navigation }: RecipesTabScreenProps) => {
   const { recipes, loading, error } = useRecipes();
-
-  const addRecipe = async () => {
-    if (recipe) {
-      await saveRecipe({ name: recipe });
-      setRecipe('');
-    }
-    setadding(a => !a);
-  };
 
   return (
     <>
-      {adding && (
-        <Input placeholder="Recipe goes here..." onChangeText={setRecipe} />
-      )}
-      <Button colorScheme="primary" onPress={addRecipe}>
-        {adding ? 'Done' : 'Add Recipe'}
+      <Button
+        colorScheme='primary'
+        onPress={() => navigation.navigate('AddRecipe')}>
+        Add Recipe
       </Button>
       <FlatList
         data={recipes}
