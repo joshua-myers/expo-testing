@@ -47,7 +47,7 @@
         "png": "always"
       }
     ],
-    "no-fallthrough": "off",
+    "no-fallthrough": "error",
     "no-param-reassign": "warn",
     "no-nested-ternary": "warn",
     "no-empty-pattern": "off",
@@ -55,7 +55,7 @@
     "prefer-destructuring": "warn",
     "react/destructuring-assignment": 0,
     "react/jsx-props-no-spreading": "off",
-    "react/prop-types": "warn",
+    "react/prop-types": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/no-unescaped-entities": 0,
     "react/require-default-props": 0,
