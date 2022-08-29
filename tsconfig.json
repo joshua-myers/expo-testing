@@ -7,7 +7,4 @@
     "./dist"
   ],
   "extends": "expo/tsconfig.base",
-  "include": [
-    "src"
-  ]
 }
