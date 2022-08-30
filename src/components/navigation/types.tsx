@@ -8,7 +8,7 @@ export type RootTabParamsList = {
 
 export type RecipesStackParamsList = {
   Recipes: undefined;
-  AddRecipe?: { recipe?: RecipeDoc };
+  AddRecipe?: { recipeId: RecipeDoc['id'] };
   Details: { recipeId: RecipeDoc['id'] };
 };
 
