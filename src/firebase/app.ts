@@ -13,6 +13,7 @@ import {
   CollectionReference,
   DocumentData,
   getFirestore,
+  QueryDocumentSnapshot,
 } from 'firebase/firestore';
 import { initializeApp } from '../../node_modules/firebase/app';
 
@@ -37,5 +38,10 @@ const db = getFirestore(app);
 const createCollection = <T = DocumentData>(collectionName: string) => {
   return collection(db, collectionName) as CollectionReference<T>;
 };
+
+export type FirestoreDocument<T = DocumentData> = Pick<
+  QueryDocumentSnapshot<T>,
+  'id' | 'ref'
+>;
 
 export { app, db, createCollection };
