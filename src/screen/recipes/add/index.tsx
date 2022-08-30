@@ -37,7 +37,7 @@ export const Add = ({ navigation, route }: AddRecipeScreenProps) => {
   const initialValues = {
     id: recipe?.id,
     name: recipe?.name,
-  } as Recipe;
+  } as RecipeDoc;
 
   return (
     <ScrollView p={2}>
