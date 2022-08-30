@@ -38,7 +38,8 @@
     "typescript": "^4.6.3"
   },
   "scripts": {
-    "start": "expo start --dev-client",
+    "start": "expo start",
+    "start:dev": "yarn start --dev-client",
     "start:tunnel": "yarn start --host tunnel",
     "android": "expo run:android",
     "ios": "expo run:ios",
