@@ -1,5 +1,14 @@
 import { Formik } from 'formik';
-import { Button, Column, Input, ScrollView, Spinner } from 'native-base';
+import {
+  Button,
+  Column,
+  FormControl,
+  Input,
+  ScrollView,
+  Spinner,
+  Stack,
+  Text,
+} from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { AddRecipeScreenProps } from '../../../components/navigation/types';
 import { getRecipe, RecipeDoc, saveRecipe } from '../../../firebase/recipies';
@@ -45,14 +54,34 @@ export const Add = ({ navigation, route }: AddRecipeScreenProps) => {
   return (
     <ScrollView p={2}>
       <Formik initialValues={initialValues} onSubmit={addRecipe}>
-        {({ handleChange, handleBlur, handleSubmit, values }) => (
+        {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
           <Column space={2}>
-            <Input
-              placeholder='Recipe goes here...'
-              onChangeText={handleChange('name')}
-              onBlur={handleBlur('name')}
-              value={values.name}
-            />
+            <FormControl isRequired isInvalid={!!errors?.name}>
+              <Stack mx={4}>
+                <FormControl.Label>Name</FormControl.Label>
+                <Input
+                  p={2}
+                  value={values.name}
+                  placeholder='Recipe Name'
+                  onChangeText={handleChange('name')}
+                  onBlur={handleBlur('name')}
+                />
+                <FormControl.ErrorMessage>Error</FormControl.ErrorMessage>
+              </Stack>
+            </FormControl>
+            <FormControl isRequired isInvalid={!!errors?.name}>
+              <Stack mx={4}>
+                <FormControl.Label>Author</FormControl.Label>
+                <Input
+                  p={2}
+                  value={values.author}
+                  placeholder='Author Name'
+                  onChangeText={handleChange('author')}
+                  onBlur={handleBlur('authorMy')}
+                />
+                <FormControl.ErrorMessage>Error</FormControl.ErrorMessage>
+              </Stack>
+            </FormControl>
             <Button onPress={() => handleSubmit()}>
               {`${recipeId ? 'Update' : 'Add'} Recipe`}
             </Button>

@@ -55,7 +55,7 @@ export const Recipes = ({ navigation }: RecipesTabScreenProps) => {
               <Center>
                 <Box key={r.id} rounded='full' bg='blue.400' p='2'>
                   <Link to={{ screen: 'Details', params: { recipeId: r.id } }}>
-                    {r.name}
+                    {r.name} {r.author && `(By: ${r.author})`}
                   </Link>
                 </Box>
               </Center>
