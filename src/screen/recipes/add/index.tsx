@@ -1,16 +1,12 @@
 import { Formik } from 'formik';
-import { Button, Column, Input, ScrollView } from 'native-base';
+import { Button, Column, Input, ScrollView, Spinner } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { AddRecipeScreenProps } from '../../../components/navigation/types';
-import {
-  getRecipe,
-  Recipe,
-  RecipeDoc,
-  saveRecipe,
-} from '../../../firebase/recipies';
+import { getRecipe, RecipeDoc, saveRecipe } from '../../../firebase/recipies';
 
 export const Add = ({ navigation, route }: AddRecipeScreenProps) => {
   const { recipeId } = route.params ?? {};
+  const [loading, setLoading] = useState(!!recipeId);
   const [recipe, setRecipe] = useState<RecipeDoc>();
 
   useEffect(() => {
@@ -21,7 +17,7 @@ export const Add = ({ navigation, route }: AddRecipeScreenProps) => {
           setRecipe(r.data());
         }
       };
-      fetchData();
+      fetchData().finally(() => setLoading(false));
     }
   });
 
@@ -29,6 +25,9 @@ export const Add = ({ navigation, route }: AddRecipeScreenProps) => {
     if (values.name) {
       const saved = await saveRecipe({ ...values, id: values.id ?? '' });
       if (saved) {
+        if (values.id) {
+          navigation.pop();
+        }
         navigation.replace('Details', { recipeId: saved.id });
       }
     }
@@ -38,6 +37,10 @@ export const Add = ({ navigation, route }: AddRecipeScreenProps) => {
     id: recipe?.id,
     name: recipe?.name,
   } as RecipeDoc;
+
+  if (loading) {
+    return <Spinner size='lg' />;
+  }
 
   return (
     <ScrollView p={2}>
@@ -50,7 +53,9 @@ export const Add = ({ navigation, route }: AddRecipeScreenProps) => {
               onBlur={handleBlur('name')}
               value={values.name}
             />
-            <Button onPress={() => handleSubmit()}>Add Recipe</Button>
+            <Button onPress={() => handleSubmit()}>
+              {`${recipeId ? 'Update' : 'Add'} Recipe`}
+            </Button>
           </Column>
         )}
       </Formik>

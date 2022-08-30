@@ -1,8 +1,10 @@
 import {
   addDoc,
+  deleteDoc,
   doc,
   FirestoreDataConverter,
   getDoc,
+  setDoc,
 } from 'firebase/firestore';
 import {
   useCollectionData,
@@ -34,10 +36,21 @@ const recipesCol =
 
 export const saveRecipe = async (recipe: Recipe | RecipeDoc) => {
   try {
-    const ref = await addDoc(recipesCol, recipe);
+    const ref =
+      'id' in recipe && recipe.id
+        ? await setDoc(doc(recipesCol, recipe.id), recipe).then(() => recipe)
+        : await addDoc(recipesCol, recipe);
     return { ...recipe, id: ref.id, ref };
   } catch (e) {
     console.error('Error adding document: ', e);
+  }
+};
+
+export const deleteRecipe = async (id: RecipeDoc['id']) => {
+  try {
+    await deleteDoc(doc(recipesCol, id));
+  } catch (e) {
+    console.error('Error deleting document: ', e);
   }
 };
 
