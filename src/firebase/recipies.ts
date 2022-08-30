@@ -1,9 +1,8 @@
 import {
   addDoc,
-  DocumentData,
-  FirestoreDataConverter,
-  WithFieldValue,
   doc,
+  FirestoreDataConverter,
+  getDoc,
 } from 'firebase/firestore';
 import {
   useCollectionData,
@@ -52,4 +51,8 @@ export const useRecipe = (id: RecipeDoc['id']) => {
   const [recipe, loading, error] = useDocumentData(doc(recipesCol, id));
 
   return { recipe, loading, error };
+};
+
+export const getRecipe = async (id: RecipeDoc['id']) => {
+  return await getDoc(doc(recipesCol, id));
 };
