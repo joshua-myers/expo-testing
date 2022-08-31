@@ -1,15 +1,7 @@
 import { Formik } from 'formik';
-import {
-  Button,
-  Column,
-  FormControl,
-  Input,
-  ScrollView,
-  Spinner,
-  Stack,
-  Text,
-} from 'native-base';
+import { Button, Column, ScrollView, Spinner } from 'native-base';
 import React, { useEffect, useState } from 'react';
+import { FormField } from '../../../components/form/FormField';
 import { AddRecipeScreenProps } from '../../../components/navigation/types';
 import { getRecipe, RecipeDoc, saveRecipe } from '../../../firebase/recipies';
 
@@ -57,32 +49,8 @@ export const Add = ({ navigation, route }: AddRecipeScreenProps) => {
       <Formik initialValues={initialValues} onSubmit={addRecipe}>
         {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
           <Column space={2}>
-            <FormControl isRequired isInvalid={!!errors?.name}>
-              <Stack mx={4}>
-                <FormControl.Label>Name</FormControl.Label>
-                <Input
-                  p={2}
-                  value={values.name}
-                  placeholder='Recipe Name'
-                  onChangeText={handleChange('name')}
-                  onBlur={handleBlur('name')}
-                />
-                <FormControl.ErrorMessage>Error</FormControl.ErrorMessage>
-              </Stack>
-            </FormControl>
-            <FormControl isRequired isInvalid={!!errors?.name}>
-              <Stack mx={4}>
-                <FormControl.Label>Author</FormControl.Label>
-                <Input
-                  p={2}
-                  value={values.author}
-                  placeholder='Author Name'
-                  onChangeText={handleChange('author')}
-                  onBlur={handleBlur('author')}
-                />
-                <FormControl.ErrorMessage>Error</FormControl.ErrorMessage>
-              </Stack>
-            </FormControl>
+            <FormField isRequired name='name' label='Recipe Name' />
+            <FormField isRequired name='author' label='Author Name' />
             <Button onPress={() => handleSubmit()}>
               {`${recipeId ? 'Update' : 'Add'} Recipe`}
             </Button>
