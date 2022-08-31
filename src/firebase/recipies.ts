@@ -14,6 +14,7 @@ import { createCollection, FirestoreDocument } from './app';
 
 export type Recipe = {
   name: string;
+  author: string;
 };
 
 export type RecipeDoc = FirestoreDocument & Recipe;

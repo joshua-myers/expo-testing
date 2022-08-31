@@ -45,6 +45,7 @@ export const Add = ({ navigation, route }: AddRecipeScreenProps) => {
   const initialValues = {
     id: recipe?.id,
     name: recipe?.name,
+    author: recipe?.author,
   } as RecipeDoc;
 
   if (loading) {
@@ -77,7 +78,7 @@ export const Add = ({ navigation, route }: AddRecipeScreenProps) => {
                   value={values.author}
                   placeholder='Author Name'
                   onChangeText={handleChange('author')}
-                  onBlur={handleBlur('authorMy')}
+                  onBlur={handleBlur('author')}
                 />
                 <FormControl.ErrorMessage>Error</FormControl.ErrorMessage>
               </Stack>
