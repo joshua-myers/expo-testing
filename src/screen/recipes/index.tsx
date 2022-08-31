@@ -6,6 +6,7 @@ import {
   Button,
   Card,
   Center,
+  Column,
   Fab,
   FlatList,
   Flex,
@@ -21,6 +22,7 @@ import {
   RecipesStackParamsList,
   RecipesTabScreenProps,
 } from '../../components/navigation/types';
+import { RecipeCard } from '../../components/recipe/card';
 import { useRecipes } from '../../firebase/recipies';
 
 import { Add } from './add';
@@ -48,21 +50,16 @@ export const Recipes = ({ navigation }: RecipesTabScreenProps) => {
         onPress={() => navigation.navigate('AddRecipe')}
         renderInPortal={false}
       />
-      <ScrollView p={2}>
-        <Flex direction='row' wrap='wrap' justifyContent='space-between'>
+      <ScrollView p={2} h='full'>
+        <Column space={2}>
           {recipes?.map(r => (
-            <View key={r.id}>
-              <Center>
-                <Box key={r.id} rounded='full' bg='blue.400' p='2'>
-                  <Link to={{ screen: 'Details', params: { recipeId: r.id } }}>
-                    {r.name} {r.author && `(By: ${r.author})`}
-                  </Link>
-                </Box>
-              </Center>
-              <Spacer />
-            </View>
+            <RecipeCard
+              key={r.id}
+              recipe={r}
+              onPress={() => navigation.navigate('Details', { recipeId: r.id })}
+            />
           ))}
-        </Flex>
+        </Column>
       </ScrollView>
     </>
   );
