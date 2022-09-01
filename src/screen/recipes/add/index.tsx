@@ -75,7 +75,7 @@ export const Add = ({ navigation, route }: AddRecipeScreenProps) => {
                 render={({ push }) => {
                   return (
                     <View>
-                      {values.ingredients.map((_, index) => {
+                      {values.ingredients?.map((_, index) => {
                         return (
                           <View key={index}>
                             <FormField
@@ -91,7 +91,7 @@ export const Add = ({ navigation, route }: AddRecipeScreenProps) => {
                       <Button
                         onPress={() =>
                           push({
-                            index: values.ingredients.length,
+                            index: values.ingredients?.length || 0,
                           } as Ingredient)
                         }>
                         Add Ingredient
