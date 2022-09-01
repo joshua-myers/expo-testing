@@ -1,9 +1,14 @@
-import { Formik } from 'formik';
-import { Button, Column, ScrollView, Spinner } from 'native-base';
+import { FieldArray, Formik } from 'formik';
+import { Button, Flex, Heading, ScrollView, Spinner, View } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { FormField } from '../../../components/form/FormField';
 import { AddRecipeScreenProps } from '../../../components/navigation/types';
-import { getRecipe, RecipeDoc, saveRecipe } from '../../../firebase/recipies';
+import {
+  getRecipe,
+  Ingredient,
+  RecipeDoc,
+  saveRecipe,
+} from '../../../firebase/recipies';
 
 export const Add = ({ navigation, route }: AddRecipeScreenProps) => {
   const { recipeId } = route.params ?? {};
@@ -38,6 +43,8 @@ export const Add = ({ navigation, route }: AddRecipeScreenProps) => {
     id: recipe?.id,
     name: recipe?.name,
     author: recipe?.author,
+    ingredients: recipe?.ingredients || [],
+    instructions: recipe?.instructions || [],
   } as RecipeDoc;
 
   if (loading) {
@@ -45,18 +52,62 @@ export const Add = ({ navigation, route }: AddRecipeScreenProps) => {
   }
 
   return (
-    <ScrollView p={2}>
+    <View p={2}>
       <Formik initialValues={initialValues} onSubmit={addRecipe}>
-        {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
-          <Column space={2}>
-            <FormField isRequired name='name' label='Recipe Name' />
-            <FormField isRequired name='author' label='Author Name' />
-            <Button onPress={() => handleSubmit()}>
+        {({ handleSubmit, values }) => (
+          <Flex justifyContent='space-between' h='full'>
+            <ScrollView>
+              <FormField
+                isRequired
+                name='name'
+                label='Recipe Name'
+                placeholder='name of your recipe'
+              />
+              <FormField
+                isRequired
+                name='author'
+                label='Author Name'
+                placeholder='your name'
+              />
+              <Heading>Ingredients</Heading>
+              <FieldArray
+                name='ingredients'
+                render={({ push }) => {
+                  return (
+                    <View>
+                      {values.ingredients.map((_, index) => {
+                        return (
+                          <View key={index}>
+                            <FormField
+                              isRequired
+                              name={`ingredients.${index}.name`}
+                              label='Name'
+                              placeholder='Ingredient name'
+                            />
+                          </View>
+                        );
+                      })}
+
+                      <Button
+                        onPress={() =>
+                          push({
+                            index: values.ingredients.length,
+                          } as Ingredient)
+                        }>
+                        Add Ingredient
+                      </Button>
+                    </View>
+                  );
+                }}
+              />
+              <Heading>Steps</Heading>
+            </ScrollView>
+            <Button onPress={() => handleSubmit()} bgColor='green.500'>
               {`${recipeId ? 'Update' : 'Add'} Recipe`}
             </Button>
-          </Column>
+          </Flex>
         )}
       </Formik>
-    </ScrollView>
+    </View>
   );
 };

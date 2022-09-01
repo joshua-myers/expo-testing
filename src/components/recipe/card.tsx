@@ -1,13 +1,13 @@
 import {
-  Box,
   AspectRatio,
-  Stack,
+  Box,
+  Center,
   Heading,
   HStack,
-  Text,
-  Center,
   Image,
   Pressable,
+  Stack,
+  Text,
 } from 'native-base';
 import React from 'react';
 import { RecipeDoc } from '../../firebase/recipies';
@@ -83,7 +83,11 @@ export const RecipeCard = ({
                 {recipe.author}
               </Text>
             </Stack>
-            <Text fontWeight='400'></Text>
+            <Text fontWeight='400'>
+              {recipe.ingredients?.length
+                ? `${recipe.ingredients?.length} Ingredients`
+                : ''}
+            </Text>
             <HStack
               alignItems='center'
               space={4}

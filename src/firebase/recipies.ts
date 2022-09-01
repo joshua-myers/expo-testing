@@ -15,15 +15,23 @@ import { createCollection, FirestoreDocument } from './app';
 export type Recipe = {
   name: string;
   author: string;
-  ingredients: Ingredient[];
+  description?: string;
+  ingredients?: Ingredient[];
+  instructions?: Instruction[];
   createdOn: Date;
   updatedOn: Date;
 };
 
 export type Ingredient = {
+  index: number;
   name: string;
   quantity: number;
   unit: string;
+};
+
+export type Instruction = {
+  index: number;
+  instruction: string;
 };
 
 export type RecipeDoc = FirestoreDocument & Recipe;
