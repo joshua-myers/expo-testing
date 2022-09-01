@@ -49,6 +49,7 @@ export const Recipes = ({ navigation }: RecipesTabScreenProps) => {
         icon={<Icon name='add' color='white' as={Ionicons} />}
         onPress={() => navigation.navigate('AddRecipe')}
         renderInPortal={false}
+        bgColor='green.500'
       />
       <ScrollView p={2} h='full'>
         <Column space={2}>

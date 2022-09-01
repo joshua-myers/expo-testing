@@ -15,6 +15,15 @@ import { createCollection, FirestoreDocument } from './app';
 export type Recipe = {
   name: string;
   author: string;
+  ingredients: Ingredient[];
+  createdOn: Date;
+  updatedOn: Date;
+};
+
+export type Ingredient = {
+  name: string;
+  quantity: number;
+  unit: string;
 };
 
 export type RecipeDoc = FirestoreDocument & Recipe;
@@ -36,6 +45,8 @@ const recipesCol =
   createCollection<Recipe>('recipes').withConverter(recipeConverter);
 
 export const saveRecipe = async (recipe: Recipe | RecipeDoc) => {
+  recipe.createdOn = recipe.createdOn ?? new Date();
+  recipe.updatedOn = new Date();
   try {
     const ref =
       'id' in recipe && recipe.id

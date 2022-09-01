@@ -48,9 +48,9 @@ export const RecipeCard = ({
               />
             </AspectRatio>
             <Center
-              bg='violet.500'
+              bg='blue.500'
               _dark={{
-                bg: 'violet.400',
+                bg: 'blue.400',
               }}
               _text={{
                 color: 'warmGray.50',
@@ -72,10 +72,10 @@ export const RecipeCard = ({
               <Text
                 fontSize='xs'
                 _light={{
-                  color: 'violet.500',
+                  color: 'blue.500',
                 }}
                 _dark={{
-                  color: 'violet.400',
+                  color: 'blue.400',
                 }}
                 fontWeight='500'
                 ml='-0.5'
