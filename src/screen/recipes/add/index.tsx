@@ -1,5 +1,16 @@
+import { Ionicons } from '@expo/vector-icons';
 import { FieldArray, Formik } from 'formik';
-import { Button, Flex, Heading, ScrollView, Spinner, View } from 'native-base';
+import {
+  Button,
+  Column,
+  Flex,
+  Heading,
+  IconButton,
+  Row,
+  ScrollView,
+  Spinner,
+  View,
+} from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { FormField } from '../../../components/form/FormField';
 import { AddRecipeScreenProps } from '../../../components/navigation/types';
@@ -72,30 +83,63 @@ export const Add = ({ navigation, route }: AddRecipeScreenProps) => {
               <Heading>Ingredients</Heading>
               <FieldArray
                 name='ingredients'
-                render={({ push }) => {
+                render={({ push, remove }) => {
                   return (
                     <View>
-                      {values.ingredients?.map((_, index) => {
-                        return (
-                          <View key={index}>
-                            <FormField
-                              isRequired
-                              name={`ingredients.${index}.name`}
-                              label='Name'
-                              placeholder='Ingredient name'
-                            />
-                          </View>
-                        );
-                      })}
-
-                      <Button
-                        onPress={() =>
-                          push({
-                            index: values.ingredients?.length || 0,
-                          } as Ingredient)
-                        }>
-                        Add Ingredient
-                      </Button>
+                      <Column space={2}>
+                        {values.ingredients?.map((_, index) => {
+                          return (
+                            <View key={index}>
+                              <Row
+                                space={2}
+                                justifyContent='space-between'
+                                borderWidth={1}
+                                borderColor='gray.400'
+                                rounded='md'
+                                p='1'>
+                                <FormField
+                                  isRequired
+                                  name={`ingredients.${index}.name`}
+                                  label='Name'
+                                  placeholder='Ingredient name'
+                                  flex={1}
+                                />
+                                <FormField
+                                  isRequired
+                                  name={`ingredients.${index}.quantity`}
+                                  label='Quantity'
+                                  placeholder='Ingredient quantity'
+                                  flex={1}
+                                />
+                                <FormField
+                                  isRequired
+                                  name={`ingredients.${index}.units`}
+                                  label='Units'
+                                  placeholder='Ingredient units'
+                                  flex={1}
+                                />
+                                <IconButton
+                                  size='md'
+                                  _icon={{
+                                    as: Ionicons,
+                                    name: 'trash',
+                                    color: 'red.500',
+                                  }}
+                                  onPress={() => remove(index)}
+                                />
+                              </Row>
+                            </View>
+                          );
+                        })}
+                        <Button
+                          onPress={() =>
+                            push({
+                              index: values.ingredients?.length || 0,
+                            } as Ingredient)
+                          }>
+                          Add Ingredient
+                        </Button>
+                      </Column>
                     </View>
                   );
                 }}
