@@ -113,7 +113,7 @@ export const Add = ({ navigation, route }: AddRecipeScreenProps) => {
                                 />
                                 <FormField
                                   isRequired
-                                  name={`ingredients.${index}.units`}
+                                  name={`ingredients.${index}.unit`}
                                   label='Units'
                                   placeholder='Ingredient units'
                                   flex={1}
