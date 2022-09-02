@@ -1,5 +1,13 @@
 import { Ionicons } from '@expo/vector-icons';
-import { AlertDialog, Button, Fab, Icon, Text, View } from 'native-base';
+import {
+  AlertDialog,
+  Button,
+  Column,
+  Fab,
+  Icon,
+  Text,
+  View,
+} from 'native-base';
 import React, { useEffect } from 'react';
 import { RecipeDetailsScreenProps } from '../../../components/navigation/types';
 import { deleteRecipe, useRecipe } from '../../../firebase/recipies';
@@ -61,8 +69,13 @@ export const Details = ({ navigation, route }: RecipeDetailsScreenProps) => {
           </AlertDialog.Footer>
         </AlertDialog.Content>
       </AlertDialog>
-      <View>
-        <Text>{recipe?.name}</Text>
+      <View p={2}>
+        <Text fontSize='lg'>Ingredients</Text>
+        <Column space={1}>
+          {recipe?.ingredients?.map(({ name, quantity, unit }) => {
+            return <Text>{`- ${quantity} ${unit || ''} ${name}`}</Text>;
+          })}
+        </Column>
       </View>
     </>
   );
