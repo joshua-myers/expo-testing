@@ -13,12 +13,14 @@ import {
   View,
 } from 'native-base';
 import React, { useEffect, useState } from 'react';
+import * as Yup from 'yup';
 import { FormField } from '../../../components/form/FormField';
 import { AddRecipeScreenProps } from '../../../components/navigation/types';
 import {
   getRecipe,
   Ingredient,
   Instruction,
+  Recipe,
   RecipeDoc,
   saveRecipe,
 } from '../../../firebase/recipies';
@@ -64,12 +66,39 @@ export const Add = ({ navigation, route }: AddRecipeScreenProps) => {
     return <Spinner size='lg' />;
   }
 
+  const validationSchema: Yup.SchemaOf<Recipe> = Yup.object({
+    name: Yup.string().trim().required(),
+    author: Yup.string().trim().notRequired(),
+    description: Yup.string().notRequired(),
+    createdOn: Yup.date().notRequired(),
+    updatedOn: Yup.date().notRequired(),
+    ingredients: Yup.array()
+      .of<Yup.SchemaOf<Ingredient>>(
+        Yup.object().shape({
+          index: Yup.number().positive().required(),
+          name: Yup.string().trim().required(),
+          quantity: Yup.number().positive().required(),
+          unit: Yup.string().trim().notRequired(),
+        }),
+      )
+      .notRequired(),
+    instructions: Yup.array()
+      .of<Yup.SchemaOf<Instruction>>(
+        Yup.object().shape({
+          index: Yup.number().positive().required(),
+          instruction: Yup.string().trim().required(),
+        }),
+      )
+      .notRequired(),
+  });
+
   return (
     <KeyboardAvoidingView behavior='padding' enabled flex={2}>
       <Formik
         initialValues={initialValues}
         onSubmit={addRecipe}
-        style={{ flex: 1 }}>
+        style={{ flex: 1 }}
+        validationSchema={validationSchema}>
         {({ handleSubmit, values }) => (
           <Flex p={2} justifyContent='space-between' h='full'>
             <ScrollView>
@@ -81,7 +110,6 @@ export const Add = ({ navigation, route }: AddRecipeScreenProps) => {
                   placeholder='name of your recipe'
                 />
                 <FormField
-                  isRequired
                   name='author'
                   label='Author Name'
                   placeholder='your name'
@@ -118,7 +146,6 @@ export const Add = ({ navigation, route }: AddRecipeScreenProps) => {
                                     flex={1}
                                   />
                                   <FormField
-                                    isRequired
                                     name={`ingredients.${index}.unit`}
                                     label='Units'
                                     placeholder='Ingredient units'

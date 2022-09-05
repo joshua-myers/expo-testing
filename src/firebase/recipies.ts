@@ -14,19 +14,19 @@ import { createCollection, FirestoreDocument } from './app';
 
 export type Recipe = {
   name: string;
-  author: string;
+  author?: string;
   description?: string;
   ingredients?: Ingredient[];
   instructions?: Instruction[];
-  createdOn: Date;
-  updatedOn: Date;
+  createdOn?: Date;
+  updatedOn?: Date;
 };
 
 export type Ingredient = {
   index: number;
   name: string;
   quantity: number;
-  unit: string;
+  unit?: string;
 };
 
 export type Instruction = {
@@ -34,12 +34,14 @@ export type Instruction = {
   instruction: string;
 };
 
-export type RecipeDoc = FirestoreDocument & Recipe;
+export type RecipeDoc = FirestoreDocument &
+  Recipe &
+  Required<Pick<Recipe, 'createdOn' | 'updatedOn'>>;
 
 const recipeConverter: FirestoreDataConverter<RecipeDoc> = {
   toFirestore: recipe => recipe,
   fromFirestore: (snapshot, options?) => {
-    const data = snapshot.data(options) as Recipe;
+    const data = snapshot.data(options) as RecipeDoc;
 
     return {
       ...data,
@@ -55,6 +57,7 @@ const recipesCol =
 export const saveRecipe = async (recipe: Recipe | RecipeDoc) => {
   recipe.createdOn = recipe.createdOn ?? new Date();
   recipe.updatedOn = new Date();
+  recipe.author = recipe.author || 'Anonymous';
   try {
     const ref =
       'id' in recipe && recipe.id
