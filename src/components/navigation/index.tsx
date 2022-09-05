@@ -1,20 +1,18 @@
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Icon } from 'native-base';
 import React from 'react';
 import { HomeStackScreen } from '../../screen';
 import { RecipesStackScreen } from '../../screen/recipes';
 
-const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 export const Navigation = () => (
   <NavigationContainer>
     <Tab.Navigator
       initialRouteName='HomeStack'
-      screenOptions={{ headerShown: false }}>
+      screenOptions={{ headerShown: false, tabBarHideOnKeyboard: true }}>
       <Tab.Screen
         name='HomeStack'
         component={HomeStackScreen}

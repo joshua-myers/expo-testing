@@ -72,8 +72,16 @@ export const Details = ({ navigation, route }: RecipeDetailsScreenProps) => {
       <View p={2}>
         <Text fontSize='lg'>Ingredients</Text>
         <Column space={1}>
-          {recipe?.ingredients?.map(({ name, quantity, unit }) => {
-            return <Text>{`- ${quantity} ${unit || ''} ${name}`}</Text>;
+          {recipe?.ingredients?.map(({ name, quantity, unit, index }) => {
+            return (
+              <Text key={index}>{`- ${quantity} ${unit || ''} ${name}`}</Text>
+            );
+          })}
+          <Text fontSize='lg'>Instructions</Text>
+        </Column>
+        <Column space={1}>
+          {recipe?.instructions?.map(({ instruction, index }) => {
+            return <Text key={index}>{`${index + 1}: ${instruction}`}</Text>;
           })}
         </Column>
       </View>

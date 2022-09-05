@@ -7,6 +7,7 @@ type Props<T extends Record<string, string>> = {
   name: keyof T;
   label: string;
   placeholder?: string;
+  multiline?: boolean;
 } & StyledProps;
 
 export const FormField = Factory(
@@ -15,6 +16,7 @@ export const FormField = Factory(
     name,
     label,
     placeholder,
+    multiline,
     ...styledProps
   }: Props<T>) => {
     const { handleChange, handleBlur, getFieldMeta } = useFormikContext<T>();
@@ -29,6 +31,8 @@ export const FormField = Factory(
             placeholder={placeholder}
             onChangeText={handleChange(name)}
             onBlur={handleBlur(name as string)}
+            multiline={multiline}
+            numberOfLines={3}
           />
           <FormControl.ErrorMessage>{error}</FormControl.ErrorMessage>
         </Stack>

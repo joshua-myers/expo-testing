@@ -4,6 +4,15 @@
     "name": "Digital Diner",
     "ios": {
       "bundleIdentifier": "com.joshua.myers.DigitalDiner"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "87c365b6-b0de-4315-af32-c9b4bec0a006"
+      }
+    },
+    "android": {
+      "package": "com.joshua.myers.DigitalDiner",
+      "versionCode": 1
     }
   }
 }

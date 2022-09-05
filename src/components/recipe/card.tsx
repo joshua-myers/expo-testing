@@ -88,6 +88,11 @@ export const RecipeCard = ({
                 ? `${recipe.ingredients?.length} Ingredients`
                 : ''}
             </Text>
+            <Text fontWeight='400'>
+              {recipe.instructions?.length
+                ? `${recipe.instructions?.length} Instructions`
+                : ''}
+            </Text>
             <HStack
               alignItems='center'
               space={4}
