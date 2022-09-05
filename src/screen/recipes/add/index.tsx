@@ -75,7 +75,7 @@ export const Add = ({ navigation, route }: AddRecipeScreenProps) => {
     ingredients: Yup.array()
       .of<Yup.SchemaOf<Ingredient>>(
         Yup.object().shape({
-          index: Yup.number().positive().required(),
+          index: Yup.number().min(0).required(),
           name: Yup.string().trim().required(),
           quantity: Yup.number().positive().required(),
           unit: Yup.string().trim().notRequired(),
@@ -85,7 +85,7 @@ export const Add = ({ navigation, route }: AddRecipeScreenProps) => {
     instructions: Yup.array()
       .of<Yup.SchemaOf<Instruction>>(
         Yup.object().shape({
-          index: Yup.number().positive().required(),
+          index: Yup.number().min(0).required(),
           instruction: Yup.string().trim().required(),
         }),
       )
