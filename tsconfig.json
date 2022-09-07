@@ -7,4 +7,7 @@
     "./dist"
   ],
   "extends": "expo/tsconfig.base",
+  "typeRoots": [
+    "./src/types"
+  ],
 }
