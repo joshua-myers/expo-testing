@@ -2,6 +2,12 @@
   "expo": {
     "slug": "DigitalDiner",
     "name": "Digital Diner",
+    "owner": "joshua.myers",
+    "privacy": "hidden",
+    "scheme": "digitaldiner",
+    "userInterfaceStyle": "automatic",
+    "orientation": "default",
+    "version": "0.0.1",
     "ios": {
       "bundleIdentifier": "com.joshua.myers.DigitalDiner"
     },
