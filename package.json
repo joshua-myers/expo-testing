@@ -44,11 +44,12 @@
     "start": "expo start",
     "start:dev": "yarn start --dev-client",
     "start:tunnel": "yarn start --host tunnel",
-    "android": "expo run:android",
-    "ios": "expo run:ios",
+    "android": "yarn env && expo run:android",
+    "ios": "yarn env && expo run:ios",
     "web": "expo start --web",
-    "build": "export $(cat .env | xargs) && eas build",
-    "build:android": "yarn build -p android --clear-cache"
+    "build": "yarn env && eas build",
+    "build:android": "yarn build -p android --clear-cache",
+    "env": "export $(cat .env | xargs)"
   },
   "version": "1.0.0",
   "private": true,
