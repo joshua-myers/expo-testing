@@ -14,6 +14,7 @@ import {
   Row,
   ScrollView,
   Spacer,
+  Spinner,
   Text,
   View,
 } from 'native-base';
@@ -53,6 +54,7 @@ export const Recipes = ({ navigation }: RecipesTabScreenProps) => {
       />
       <ScrollView p={2} h='full'>
         <Column space={2}>
+          {loading && <Spinner size='lg' />}
           {recipes?.map(r => (
             <RecipeCard
               key={r.id}
